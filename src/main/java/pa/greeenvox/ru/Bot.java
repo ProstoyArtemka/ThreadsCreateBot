@@ -4,7 +4,6 @@ import net.dv8tion.jda.api.entities.ThreadChannel;
 import net.dv8tion.jda.api.events.GenericEvent;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.EventListener;
-import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
@@ -23,21 +22,14 @@ public class Bot implements EventListener {
     @Override
     public void onEvent(@NotNull GenericEvent genericEvent) {
         if (!(genericEvent instanceof MessageReceivedEvent)) return;
-
         MessageReceivedEvent event = (MessageReceivedEvent) genericEvent;
 
         if (!getChannelsList().contains(event.getMessage().getChannel().getIdLong())) return;
+        String name = "Ветка";
+        if (event.getMessage().getContentRaw().split(" ").length != 0)
+            name = event.getMessage().getContentRaw().split(" ")[0];
 
-        if (event.getMessage().getContentRaw().split(" ").length != 0) {
-            event.getMessage().createThreadChannel(event.getMessage().getContentRaw().split(" ")[0])
-                    .queue((ThreadChannel c) -> {
-                        c.leave().queue();
-                    });
-        } else {
-            event.getMessage().createThreadChannel("Пять.")
-                    .queue((ThreadChannel c) -> {
-                        c.leave().queue();
-                    });
-        }
+        event.getMessage().createThreadChannel(name)
+                .queue((ThreadChannel c) -> c.leave().queue());
     }
 }

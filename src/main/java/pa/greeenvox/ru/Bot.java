@@ -25,6 +25,7 @@ public class Bot implements EventListener {
         MessageReceivedEvent event = (MessageReceivedEvent) genericEvent;
 
         if (!getChannelsList().contains(event.getMessage().getChannel().getIdLong())) return;
+
         String name = "Ветка";
         if (event.getMessage().getContentRaw().split(" ").length != 0)
             name = event.getMessage().getContentRaw().split(" ")[0];

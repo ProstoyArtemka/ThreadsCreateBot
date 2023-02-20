@@ -1,0 +1,6 @@
+name: ThreadsBot
+version: '${project.version}'
+main: pa.greeenvox.ru.ThreadsBot
+api-version: 1.19
+authors: [ ProstoyArtemka ]
+description: Bot what create threads in channels discord lul
